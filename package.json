@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node build/index.js",
+    "dev": "tsc-watch  --onSuccess \"npm start\""
+  },
   "devDependencies": {
+    "@types/express": "^5.0.0",
+    "tsc-watch": "^6.2.1",
     "typescript": "^5.7.2"
   },
   "dependencies": {
