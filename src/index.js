@@ -3,9 +3,7 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { gql } from 'graphql-tag'; // for defining schema
 import cors from 'cors';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prismaClient } from '../lib/db.js'; // Ensure the correct path and file extension
 
 async function init() {
   const app = express();
@@ -21,10 +19,13 @@ async function init() {
       say(name: String!): String
       users: [User]
     }
-
+    type Mutation {
+      createdUser(firstName: String!, lastName: String!, email: String!, password: String!): Boolean
+    }
     type User {
       id: Int
-      name: String
+      firstName: String
+      lastName: String
       email: String
     }
   `;
@@ -34,7 +35,26 @@ async function init() {
     Query: {
       hello: () => 'Hello, world!',
       say: (_, { name }) => `Hey, ${name}!`,
-      users: async () => await prisma.user.findMany(),
+      users: async () => await prismaClient.user.findMany(),
+    },
+    Mutation: {
+      createdUser: async (_, { firstName, lastName, email, password }) => {
+        try {
+          await prismaClient.user.create({
+            data: {
+              firstName,
+              lastName,
+              email,
+              password,
+              salt: 'random_salt',
+            },
+          });
+          return true;
+        } catch (error) {
+          console.error(error);
+          return false;
+        }
+      },
     },
   };
 

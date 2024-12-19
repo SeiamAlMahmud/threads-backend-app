@@ -1,0 +1,16 @@
+# Run Prisma migrations to create the users table
+npx prisma migrate dev --name create_users_table
+
+# Generate Prisma Client
+npx prisma generate
+
+# Access PostgreSQL database using psql
+# This command opens a psql shell to interact with the PostgreSQL database
+docker-compose exec postgres psql -U postgres -d threads
+
+# List all tables in the PostgreSQL database
+# This command should be run inside the psql shell
+\dt
+
+# Exit the psql shell
+\q
