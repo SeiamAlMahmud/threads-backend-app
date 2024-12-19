@@ -1,7 +1,0 @@
-yarn inti 
-yarn add typescript -D
-yarn add express
-npx tsc --init
-npm i --save-dev @types/express -D
-
-yarn add tsc-watch -D

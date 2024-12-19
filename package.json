@@ -1,18 +1,24 @@
 {
   "name": "thread-app-backend",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
-  "license": "MIT",
   "scripts": {
-    "start": "node build/index.js",
-    "dev": "tsc-watch  --onSuccess \"npm start\""
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@apollo/server": "^4.11.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "graphql": "^16.10.0",
+    "graphql-tag": "^2.12.6"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
-    "tsc-watch": "^6.2.1",
-    "typescript": "^5.7.2"
-  },
-  "dependencies": {
-    "express": "^4.21.2"
+    "@types/cors": "^2.8.17"
   }
 }
