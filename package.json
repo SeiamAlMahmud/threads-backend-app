@@ -19,6 +19,8 @@
     "graphql-tag": "^2.12.6"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17"
+    "@types/cors": "^2.8.17",
+    "@types/node": "^22.10.2",
+    "prisma": "^6.1.0"
   }
 }

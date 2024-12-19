@@ -3,6 +3,9 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { gql } from 'graphql-tag'; // for defining schema
 import cors from 'cors';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 async function init() {
   const app = express();
@@ -16,6 +19,13 @@ async function init() {
     type Query {
       hello: String
       say(name: String!): String
+      users: [User]
+    }
+
+    type User {
+      id: Int
+      name: String
+      email: String
     }
   `;
 
@@ -24,6 +34,7 @@ async function init() {
     Query: {
       hello: () => 'Hello, world!',
       say: (_, { name }) => `Hey, ${name}!`,
+      users: async () => await prisma.user.findMany(),
     },
   };
 
