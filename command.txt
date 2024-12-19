@@ -1,0 +1,4 @@
+yarn inti 
+yarn add typescript -D
+yarn add express
+npx tsc --init
